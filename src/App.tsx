@@ -411,6 +411,13 @@ export default function App() {
                 </div>
               </div>
            </div>
+            <button 
+              onClick={() => { setActiveSettingsTab('github'); setSettingsOpen(true); }}
+              className="w-full flex items-center justify-center gap-2 py-2 mb-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-[10px] font-bold transition-all shadow-sm"
+            >
+              <Github className="w-3.5 h-3.5" />
+              GitHub Pages Guide
+            </button>
            <div className="flex gap-1">
               <button onClick={() => setSettingsOpen(true)} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-white border border-slate-200 text-slate-600 rounded-xl text-[10px] font-bold hover:bg-slate-100 transition-all">
                 <Settings className="w-3.5 h-3.5" />
@@ -718,12 +725,17 @@ export default function App() {
                          <SettingsTab active={activeSettingsTab === 'security'} onClick={() => setActiveSettingsTab('security')} icon={<Shield className="w-4 h-4"/>} label="Security Core" />
                       </div>
 
-                      <div className="mt-auto pt-6">
-                         <button onClick={() => signOut(auth)} className="w-full flex items-center gap-3 px-3 py-2 text-red-500 hover:bg-red-50 rounded-xl transition-all text-xs font-bold">
-                            <LogOut className="w-4 h-4"/>
-                            Terminate Link
-                         </button>
-                      </div>
+                       <div className="space-y-1">
+                          <p className="px-3 py-2 text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 font-mono">Publishing</p>
+                          <SettingsTab active={activeSettingsTab === 'github'} onClick={() => { setActiveSettingsTab('github'); }} icon={<Github className="w-4 h-4"/>} label="GitHub Pages Setup" />
+                       </div>
+
+                       <div className="mt-auto pt-6">
+                          <button onClick={() => signOut(auth)} className="w-full flex items-center gap-3 px-3 py-2 text-red-500 hover:bg-red-50 rounded-xl transition-all text-xs font-bold">
+                             <LogOut className="w-4 h-4"/>
+                             Terminate Link
+                          </button>
+                       </div>
                    </div>
 
                    {/* Settings Content */}
@@ -1012,14 +1024,108 @@ export default function App() {
                                        </div>
                                     </div>
                                     <span className="text-[9px] font-black text-emerald-500 uppercase px-3 py-1 bg-emerald-100 rounded-full">ENABLED</span>
-                                 </button>
-                              </div>
-                           </div>
-                         )}
-                      </div>
-                   </div>
-                </div>
-             </motion.div>
+                                  </button>
+                               </div>
+                            </div>
+                          )}
+
+                          {activeSettingsTab === 'github' && (
+                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300 text-slate-800 pb-12">
+                               {/* Header Banner */}
+                               <div className="p-10 bg-slate-900 bg-gradient-to-br from-indigo-900 to-slate-950 text-white rounded-[40px] overflow-hidden relative group shadow-xl border border-slate-800">
+                                  <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
+                                     <Github className="w-40 h-40" />
+                                  </div>
+                                  <div className="relative z-10 text-left">
+                                     <div className="px-2 py-1 bg-indigo-500/30 text-indigo-200 border border-indigo-500/20 rounded-lg text-[9px] font-black uppercase tracking-widest inline-block mb-3 leading-none">
+                                        Stateless Fallback Protocol Enabled
+                                     </div>
+                                     <h4 className="text-3xl font-black italic tracking-tight">Deploy to GitHub Pages</h4>
+                                     <p className="text-indigo-200 text-xs font-semibold max-w-xl leading-relaxed mt-2 text-left">
+                                        This client is engineered on a secure, local-first architecture. When hosted on static platforms like GitHub Pages, it automatically falls back to client-side OpenRouter streaming and Pollinations.ai image rendering. Your secrets are always safe!
+                                     </p>
+                                  </div>
+                               </div>
+
+                               {/* Step by Step Instructions */}
+                               <div className="space-y-6">
+                                  <h5 className="text-xs font-black text-slate-400 uppercase tracking-widest font-mono text-left">Launch Playbook</h5>
+                                  <div className="space-y-4">
+                                     {/* Step 1 */}
+                                     <div className="p-6 bg-slate-50 border border-slate-100 rounded-[28px] flex gap-4 text-left">
+                                        <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-black shrink-0">1</div>
+                                        <div>
+                                           <h6 className="text-xs font-black uppercase tracking-wider text-slate-800">Publish or Export Repository</h6>
+                                           <p className="text-xs text-slate-500 font-semibold mt-1 leading-relaxed">
+                                              Use the general workspace controls (on the settings menu at the topmost bar of AI Studio, NOT Nexus settings sidebar) to export this project as a ZIP or push it directly to your GitHub account.
+                                           </p>
+                                        </div>
+                                     </div>
+
+                                     {/* Step 2 */}
+                                     <div className="p-6 bg-slate-50 border border-slate-100 rounded-[28px] flex gap-4 text-left">
+                                        <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-black shrink-0">2</div>
+                                        <div>
+                                           <h6 className="text-xs font-black uppercase tracking-wider text-slate-800">Install gh-pages module</h6>
+                                           <p className="text-xs text-slate-500 font-semibold mt-1 leading-relaxed mb-3">
+                                              Open your local terminal in the project directory, and run this command of your terminal to add the gh-pages module:
+                                           </p>
+                                           <pre className="p-4 bg-slate-900 text-slate-100 rounded-xl text-[11px] font-mono select-all overflow-x-auto text-left shadow-inner">
+                                              npm install gh-pages --save-dev
+                                           </pre>
+                                        </div>
+                                     </div>
+
+                                     {/* Step 3 */}
+                                     <div className="p-6 bg-slate-50 border border-slate-100 rounded-[28px] flex gap-4 text-left">
+                                        <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-black shrink-0">3</div>
+                                        <div>
+                                           <h6 className="text-xs font-black uppercase tracking-wider text-slate-800">Configure build & deploy scripts</h6>
+                                           <p className="text-xs text-slate-500 font-semibold mt-1 leading-relaxed mb-3">
+                                              Add the homepage link and deployment commands in your package.json file properties:
+                                           </p>
+                                           <pre className="p-4 bg-slate-900 text-slate-50 rounded-xl text-[11px] font-mono select-all overflow-x-auto text-left shadow-inner leading-relaxed">
+{`"homepage": "https://<your-username>.github.io/<your-repo-name>",
+"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
+}`}
+                                           </pre>
+                                        </div>
+                                     </div>
+
+                                     {/* Step 4 */}
+                                     <div className="p-6 bg-slate-50 border border-slate-100 rounded-[28px] flex gap-4 text-left">
+                                        <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-black shrink-0">4</div>
+                                        <div>
+                                           <h6 className="text-xs font-black uppercase tracking-wider text-slate-800">Deploy Static Page</h6>
+                                           <p className="text-xs text-slate-500 font-semibold mt-1 leading-relaxed mb-3">
+                                              Run the deployment command to compile your client-side React files and push them to the gh-pages deployment branch:
+                                           </p>
+                                           <pre className="p-4 bg-slate-900 text-slate-100 rounded-xl text-[11px] font-mono select-all overflow-x-auto text-left shadow-inner">
+                                              npm run deploy
+                                           </pre>
+                                        </div>
+                                     </div>
+
+                                     {/* Step 5 */}
+                                     <div className="p-6 bg-slate-50 border border-slate-100 rounded-[28px] flex gap-4 text-left">
+                                        <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-black shrink-0">5</div>
+                                        <div>
+                                           <h6 className="text-xs font-black uppercase tracking-wider text-slate-800">Activate branch on GitHub</h6>
+                                           <p className="text-xs text-slate-500 font-semibold mt-1 leading-relaxed">
+                                              Open your repository settings in GitHub.com &rarr; Pages. Make sure the build source page is targeting your <code>gh-pages</code> branch. Your client browser experience is now live globally!
+                                           </p>
+                                        </div>
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                          )}
+                       </div>
+                    </div>
+                 </div>
+              </motion.div>
           </div>
         )}
       </AnimatePresence>
