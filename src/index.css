@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-slate-900 antialiased font-sans selection:bg-indigo-100 selection:text-indigo-900;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  /* ChatGPT/Claude Style Input */
+  .chat-input-wrapper {
+    @apply relative max-w-3xl mx-auto w-full mb-8;
+  }
+  
+  .chat-input {
+    @apply w-full bg-white border border-slate-200 rounded-3xl py-4 px-6 pr-14 shadow-sm focus:shadow-md focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 outline-none transition-all text-base font-medium min-h-[56px] resize-none overflow-hidden;
+  }
+
+  /* Chat Bubbles */
+  .bubble-assistant {
+    @apply flex gap-6 px-4 py-8 max-w-4xl mx-auto w-full transition-colors hover:bg-slate-50/50 rounded-2xl;
+  }
+  
+  .bubble-user {
+    @apply flex gap-6 px-4 py-8 max-w-4xl mx-auto w-full;
+  }
+
+  .avatar-ai {
+    @apply w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-indigo-100;
+  }
+  
+  .avatar-user {
+    @apply w-8 h-8 rounded-lg bg-slate-200 flex items-center justify-center text-slate-500 shrink-0 border border-slate-300;
+  }
+
+  /* Navigation */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all;
+  }
+  
+  .nav-item-active {
+    @apply bg-slate-100 text-slate-900 shadow-sm ring-1 ring-slate-200;
+  }
+  
+  .nav-item-inactive {
+    @apply text-slate-500 hover:bg-slate-50 hover:text-slate-800;
+  }
+
+  /* Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+  }
+}
+
+/* Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-msg {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

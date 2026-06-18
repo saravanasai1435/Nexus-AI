@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Chat": {
+      "title": "Chat Session",
+      "description": "A conversation with the assistant",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "messages": { 
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": { "type": "string", "enum": ["user", "assistant"] },
+              "content": { "type": "string" },
+              "timestamp": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "messages"]
+    },
+    "Document": {
+      "title": "AI Document",
+      "description": "Rich text document projects",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "content"]
+    },
+    "Presentation": {
+        "title": "Slide Deck",
+        "description": "AI-generated presentation outlines",
+        "type": "object",
+        "properties": {
+          "userId": { "type": "string" },
+          "title": { "type": "string" },
+          "slides": { "type": "array" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        },
+        "required": ["userId", "slides"]
+      }
+  },
+  "firestore": {
+    "/users/{userId}": { "schema": "User", "description": "Stored user profiles" },
+    "/chats/{chatId}": { "schema": "Chat", "description": "Conversation history" },
+    "/documents/{docId}": { "schema": "Document", "description": "User documents" },
+    "/presentations/{presId}": { "schema": "Presentation", "description": "User presentations" }
+  }
+}

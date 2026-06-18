@@ -1,0 +1,11 @@
+{
+  "name": "NexusAI - The AI Swiss Army Knife",
+  "description": "Professional suite for AI document editing, slide generation, vision analysis, and creative image generation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
